@@ -1,0 +1,80 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Les parents {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+		<div class="d-block mb-4 mb-md-0">
+			
+			<h2 class="h4">Tous les parents</h2>
+		</div>
+		<div class="btn-toolbar mb-2 mb-md-0">
+			<a href="{% url 'create_parant' %}" class="btn btn-sm btn-gray-800 d-inline-flex align-items-center">
+				Ajouter parent
+			</a>
+
+		</div>
+	</div>
+  <div class="table-settings mb-4">
+
+  </div>
+
+  <div class="card card-body border-0 shadow table-wrapper table-responsive">
+      <table class="table table-hover">
+          <thead>
+              <tr>
+                  <th class="border-gray-200">#</th>
+                  <th class="border-gray-200">Nom d'utilisateur</th>
+                  <th class="border-gray-200">Profession</th>
+                  <th class="border-gray-200">telephone</th>
+                  <th class="border-gray-200">Email</th>
+                  <th class="border-gray-200">Nbr Enfants</th>
+                  <th class="border-gray-200">Action</th>
+              </tr>
+          </thead>
+          <tbody>
+              {% for item in parants %}
+                <!-- Item -->
+                <tr>
+                    <td>
+                        <a href="#" class="fw-bold">
+                            {{item.id}}
+                        </a>
+                    </td>
+                    <td>
+                        <span class="fw-normal">{{item.father_name}}</span>
+                    </td>
+                    <td><span class="fw-normal">{{item.father_profession}}</span></td>
+                    <td><span class="fw-normal">{{item.father_phone}}</span></td>
+                    <td><span class="fw-bold">
+                        {% if item.user.email %}
+                            {{item.user.email}}
+                            {% else %}
+                            _____________
+                            {% endif %}
+                        </span>
+                    </td>
+                    <td><span class="fw-bold ">{{item.get_fils_count}}</span></td>
+                    <td>
+						<a href="{% url 'parant' item.id %}" class="fw-bold text-success">
+                            Voir parent
+                        </a>
+                        <br>
+                        <a href="{% url 'delete_parant' item.id %}" class="fw-bold text-danger">
+                            Supprimer parent
+                        </a>
+                    </td>
+                </tr>
+                <!-- Item -->
+              {% endfor %}
+          </tbody>
+      </table>
+  </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

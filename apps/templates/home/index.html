@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- Primary Meta Tags -->
+    <title>
+        École privée | {% block title %} Accueil {% endblock title %}
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Themesberg">
+    
+    <meta name="keywords"
+        content="bootstrap 5, bootstrap, bootstrap 5 admin dashboard, bootstrap 5 dashboard, bootstrap 5 charts, bootstrap 5 calendar, bootstrap 5 datepicker, bootstrap 5 tables, bootstrap 5 datatable, vanilla js datatable, themesberg, themesberg dashboard, themesberg admin dashboard" />
+    <link rel="canonical" href="https://themesberg.com/product/admin-dashboard/volt-premium-bootstrap-5-dashboard">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/assets/img/logo_picture.jpg">
+
+    <!-- Sweet Alert -->
+    <link type="text/css" href="/static/assets/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
+    <!-- Notyf -->
+    <link type="text/css" href="/static/assets/vendor/notyf/notyf.min.css" rel="stylesheet">
+
+    <!-- Volt CSS -->
+    <link type="text/css" href="/static/assets/css/volt.css" rel="stylesheet">
+
+    <!-- FA Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- DATEPICKER CDN-->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/css/tempusdominus-bootstrap-4.min.css"
+        integrity="sha256-XPTBwC3SBoWHSmKasAk01c08M6sIA5gF5+sRxqak2Qs=" crossorigin="anonymous" />
+
+    <!-- Specific Page JS goes HERE  -->
+    {% block stylesheets %}{% endblock stylesheets %}
+
+</head>
+
+<body>
+
+    <header class="header-global">
+        <nav aria-label="Primary navigation"
+            class="navbar navbar-main navbar-expand-lg navbar-theme-primary pt-4 navbar-dark" id="navbar-main">
+            <div class="container position-relative">
+                <div class="navbar-collapse mr-auto collapse" id="navbar_global" style="">
+                    <div class="navbar-collapse-header">
+                        <div class="row">
+                            <div class="col-6 collapse-brand">
+                                <a href="{% url 'home' %}"><img alt="Volt logo"
+                                        src="https://appsrv1-147a1.kxcdn.com/volt-dashboard/img/brand/light.svg"></a>
+                            </div>
+                            <div class="col-6 collapse-close">
+                                <a aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation"
+                                    class="fas fa-times collapsed" data-target="#navbar_global" data-toggle="collapse"
+                                    href="#navbar_global" title="close"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
+                        {% if user.is_authenticated %}
+                        {% if user.is_superuser %}
+                        <li class="nav-item me-2">
+                            <a href="{% url 'dashboard' %}" class="nav-link">Tableau de bord</a>
+                        </li>
+                        {% comment %} <li class="nav-item me-2">
+                            <a href="/admin" class="nav-link">Administration</a>
+                        </li> {% endcomment %}
+                        {% endif %}
+                        <li class="nav-item me-2">
+                            <a href="{% url 'profile' %}" class="nav-link">Mon profil</a>
+                        </li>
+                        <li class="nav-item me-2">
+                            <a href="{% url 'logout' %}" class="nav-link">Déconnexion</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item me-2">
+                            <a href="{% url 'login' %}" class="nav-link">Connexion</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="d-flex align-items-center ml-auto">
+                    <button aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation"
+                        class="navbar-toggler ml-2 collapsed" data-target="#navbar_global" data-toggle="collapse"
+                        type="button">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- Hero -->
+        <section class="section-header overflow-hidden pt-7 pt-lg-8 pb-9 pb-lg-12 bg-primary text-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h1 class="fw-bolder">Elfarabi-School</h1>
+                        <h2 class="lead fw-normal text-muted mb-5">
+                            {% comment %} Lorem description text {% endcomment %}
+                        </h2>
+                        <!-- Button Modal -->
+
+                        <div class="d-flex justify-content-center flex-column mb-6 mb-lg-5">
+                            <a href="{% url 'home' %}" target="_blank">
+                                <img src="/static/assets/img/themesberg.svg" class="d-block mx-auto mb-3" height="25"
+                                    width="25" alt="Themesberg Logo">
+
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% comment %} <div class="container">
+                <div class="row justify-content-center mb-5 mb-lg-6">
+                    <div class="col-6 col-md-3 text-center mb-4">
+                        <div class="icon icon-shape bg-white shadow-lg rounded mb-4">
+                            <svg class="icon icon-md text-secondary" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="fw-bolder">{{parants_count}}+</h3>
+                        <p class="text-gray">Utilisateurs</p>
+                    </div>
+                    <div class="col-6 col-md-3 text-center mb-4">
+                        <div class="icon icon-shape bg-white shadow-lg rounded mb-4">
+
+                            <svg class="icon icon-md text-secondary" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.332 8.027a6.012 6.012 0 011.912-2.706C6.512 5.73 6.974 6 7.5 6A1.5 1.5 0 019 7.5V8a2 2 0 004 0 2 2 0 011.523-1.943A5.977 5.977 0 0116 10c0 .34-.028.675-.083 1H15a2 2 0 00-2 2v2.197A5.973 5.973 0 0110 16v-2a2 2 0 00-2-2 2 2 0 01-2-2 2 2 0 00-1.668-1.973z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <h3 class="fw-bolder">{{students_count}}+</h3>
+                        <p class="text-gray">Étudiants</p>
+                    </div>
+                    <div class="col-6 col-md-3 text-center">
+                        <div class="icon icon-shape bg-white shadow-lg rounded mb-4">
+                            <svg class="icon icon-md text-secondary" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M10 3.5a1.5 1.5 0 013 0V4a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-.5a1.5 1.5 0 000 3h.5a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-.5a1.5 1.5 0 00-3 0v.5a1 1 0 01-1 1H6a1 1 0 01-1-1v-3a1 1 0 00-1-1h-.5a1.5 1.5 0 010-3H4a1 1 0 001-1V6a1 1 0 011-1h3a1 1 0 001-1v-.5z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="fw-bolder">{{activities_count}}+</h3>
+                        <p class="text-gray">Activités</p>
+                    </div>
+                    <div class="col-6 col-md-3 text-center">
+                        <div class="icon icon-shape bg-white shadow-lg rounded mb-4">
+                            <svg class="icon icon-md text-secondary" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="fw-bolder">{{CoursSuppls_count}}+</h3>
+                        <p class="text-gray">Cours Suppls</p>
+                    </div>
+                </div>
+            </div> {% endcomment %}
+        </section>
+        {% if activities %}
+        <section class="section section-lg bg-primary text-white">
+            <div class="container">
+                <div class="row justify-content-center mb-5 mb-lg-6">
+                    <div class="col-12 text-center">
+                        <h2 class="h1 px-lg-5">Nos Activités</h2>
+                        {% comment %} <p class="lead px-lg-8">You get all Bootstrap components fully customized.
+                            Besides, you receive numerous plugins out of the box and ready to use.</p> {% endcomment %}
+                    </div>
+                </div>
+                <div class="row">
+                    {% for activity in activities %}
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="card bg-white shadow-soft text-secondary rounded mb-4">
+                            <div class="px-3 px-lg-4 py-5 text-center">
+                                <h5 class="fw-bold text-secondary">{{ activity.activity_name}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        {% endif %}
+    </main>
+
+    <footer class="footer py-6 bg-primary text-white" style="opacity : 0.7">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    {% comment %} ADD LOGO HERE {% endcomment %}
+                    {% comment %} <img class="navbar-brand-dark mb-4" height="35"
+                        src="/static/assets/img/brand/light.svg" alt="Logo light"> {% endcomment %}
+                    <p>
+                        Ajouter une description .......
+                    </p>
+                    <ul class="social-buttons mb-5 mb-lg-0">
+                        <li>
+                            <a href="https://twitter.com/themesberg" aria-label="twitter social link"
+                                class="icon-white me-2">
+                                <span class="fab fa-twitter"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/themesberg/" class="icon-white me-2"
+                                aria-label="facebook social link">
+                                <span class="fab fa-facebook"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/themesberg" aria-label="github social link"
+                                class="icon-white me-2">
+                                <span class="fab fa-github"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://dribbble.com/themesberg" class="icon-white"
+                                aria-label="dribbble social link">
+                                <span class="fab fa-dribbble"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="bg-gray-700 my-5">
+            <div class="row">
+                <div class="col mb-md-0">
+                    <a href="https://themesberg.com" target="_blank" class="d-flex justify-content-center">
+                        <img src="/static/assets/img/themesberg-logo-alt.svg" height="35" class="mb-4"
+                            alt="Themesberg Logo">
+                    </a>
+                    <div class="d-flex text-center justify-content-center align-items-center" role="contentinfo">
+                        <p class="fw-normal font-small mb-0">
+                            &copy; Themesberg 2019-<span class="current-year">2020</span> - coded by <a target="_blank"
+                                href="https://appseed.us">AppSeed</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://appsrv1-147a1.kxcdn.com/volt-dashboard/vendor/popper.js/dist/umd/popper.min.js">
+    </script>
+    <script src="https://appsrv1-147a1.kxcdn.com/volt-dashboard/vendor/bootstrap/dist/js/bootstrap.min.js">
+    </script>
+    <script src="https://appsrv1-147a1.kxcdn.com/volt-dashboard/vendor/onscreen/dist/on-screen.umd.min.js"></script>
+    <script src="https://appsrv1-147a1.kxcdn.com/volt-dashboard/vendor/nouislider/distribute/nouislider.min.js">
+    </script>
+    <script src="https://appsrv1-147a1.kxcdn.com/volt-dashboard/vendor/jarallax/dist/jarallax.min.js"></script>
+    <div style="position: fixed; top: -9999px; left: 0px; height: 100vh; width: 0px;"></div>
+    <script
+        src="https://appsrv1-147a1.kxcdn.com/volt-dashboard/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js">
+    </script>
+    <script src="https://appsrv1-147a1.kxcdn.com/volt-dashboard/vendor/countup.js/dist/countUp.umd.js"></script>
+    <script src="https://appsrv1-147a1.kxcdn.com/volt-dashboard/vendor/notyf/notyf.min.js"></script>
+    <script src="https://appsrv1-147a1.kxcdn.com/volt-dashboard/vendor/chartist/dist/chartist.min.js"></script>
+    <script
+        src="https://appsrv1-147a1.kxcdn.com/volt-dashboard/vendor/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js">
+    </script>
+    <script src="https://appsrv1-147a1.kxcdn.com/volt-dashboard/vendor/vanillajs-datepicker/dist/js/datepicker.min.js">
+    </script>
+    <script src="https://appsrv1-147a1.kxcdn.com/volt-dashboard/vendor/simplebar/dist/simplebar.min.js"></script>
+    <script async="" defer="" src="https://buttons.github.io/buttons.js"></script>
+    <script src="https://appsrv1-147a1.kxcdn.com/volt-dashboard/js/volt.min.js"></script>
+</body>
+
+</html>

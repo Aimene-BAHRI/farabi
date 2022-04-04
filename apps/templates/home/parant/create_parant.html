@@ -1,0 +1,172 @@
+{% extends "layouts/base-fullscreen.html" %}
+
+{% block title %} Sign UP {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <section class=" mt-5 mt-lg-0 bg-soft d-flex align-items-center">
+        <div class="container">
+            <p class="text-center">
+                <a href="{% url 'dashboard' %}" class="d-flex align-items-center justify-content-center">
+                    <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd"></path></svg>
+                    Retour au Accueil
+                </a>
+            </p>
+            <div class="row justify-content-center form-bg-image" >
+                <div class="col-12 d-flex align-items-center justify-content-center">
+                    <div class="bg-white shadow border-0 rounded border-light p-4 p-lg-5 w-100 fmxw-800">
+                        <div class="text-center text-md-center mb-4 mt-md-0">
+                            <h1 class="mb-0 h3">
+                                Création Parent
+                            </h1>
+                            <br />
+                            <p>
+                                {% if msg %}
+                                    {{ msg | safe }}
+                                {% else %}
+                                    ajouter vos données
+                                {% endif %}
+                            </p>
+                        </div>
+                        <form method="post" action="" class="" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ user_form }}
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <!-- Form -->
+                                    <div class="form-group mb-4">
+                                        <label for="{{parant_form.father_name.label}}">{{parant_form.father_name.label}}</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <span class="fas fa-user-circle"></span>
+                                            </span>
+                                            {{ parant_form.father_name }}
+                                        </div>
+                                    </div>
+                                    <!-- End of Form -->
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <!-- Form -->
+                                    <div class="form-group mb-4">
+                                        <label for="{{parant_form.father_profession.label}}">{{parant_form.father_profession.label}}</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <span class="fas fa-user-tie"></span>
+                                            </span>
+                                            {{ parant_form.father_profession }}
+                                        </div>
+                                    </div>
+                                    <!-- End of Form -->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <!-- Form -->
+                                    <div class="form-group mb-4">
+                                        <label for="{{parant_form.father_phone.label}}">{{parant_form.father_phone.label}}</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <span class="fas fa-mobile-alt"></span>
+                                            </span>
+                                            {{ parant_form.father_phone }}
+                                        </div>
+                                    </div>
+                                    <!-- End of Form -->
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <!-- Form -->
+                                    <div class="form-group mb-4">
+                                        <label for="{{parant_form.father_avatar.label}}">{{parant_form.father_avatar.label}}</label>
+                                        <div class="input-group">
+                                            {{ parant_form.father_avatar }}
+                                        </div>
+                                    </div>
+                                    <!-- End of Form -->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <!-- Form -->
+                                    <div class="form-group mb-4">
+                                        <label for="{{parant_form.mother_name.label}}">{{parant_form.mother_name.label}}</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <span class="fas fa-female"></span>
+                                            </span>
+                                            {{ parant_form.mother_name }}
+                                        </div>
+                                    </div>
+                                    <!-- End of Form -->
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <!-- Form -->
+                                    <div class="form-group mb-4">
+                                        <label for="{{parant_form.mother_profession.label}}">{{parant_form.mother_profession.label}}</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <span class="fas fa-user-tie"></span>
+                                            </span>
+                                            {{ parant_form.mother_profession }}
+                                        </div>
+                                    </div>
+                                    <!-- End of Form -->
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <!-- Form -->
+                                    <div class="form-group mb-4">
+                                        <label for="{{parant_form.mother_phone.label}}">{{parant_form.mother_phone.label}}</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <span class="fas fa-phone"></span>
+                                            </span>
+                                            {{ parant_form.mother_phone }}
+                                        </div>
+                                    </div>
+                                    <!-- End of Form -->
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <!-- Form -->
+                                    <div class="form-group">
+                                        <label for="{{parant_form.subscribed_plan.label}}">{{parant_form.subscribed_plan.label}}</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <span class="fas fa-money-bill"></span>
+                                            </span>
+                                            {{ parant_form.subscribed_plan }}
+                                        </div>
+                                    </div>
+                                    <!-- End of Form -->
+                                </div>
+                                <div class="col-md-12">
+                                    <!-- Form -->
+                                    <div class="form-group">
+                                        <label for="{{parant_form.authorized_people.label}}">{{parant_form.authorized_people.label}}</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <span class="fas fa-users"></span>
+                                            </span>
+                                            {{ parant_form.authorized_people }}
+                                        </div>
+                                    </div>
+                                    <!-- End of Form -->
+                                </div>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" name="register" class="btn btn-gray-800 mt-3">Création</button>
+                            </div>
+                        </form>
+                        <br />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

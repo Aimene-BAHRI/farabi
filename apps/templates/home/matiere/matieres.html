@@ -1,0 +1,66 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Les matières {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+		<div class="d-block mb-4 mb-md-0">
+			
+			<h2 class="h4">Toutes les matières</h2>
+		</div>
+		<div class="btn-toolbar mb-2 mb-md-0">
+			<a href="{% url 'create_matiere' %}" class="btn btn-sm btn-gray-800 d-inline-flex align-items-center">
+				Ajouter matière
+			</a>
+
+		</div>
+	</div>
+  <div class="table-settings mb-4">
+
+  </div>
+
+  <div class="card card-body border-0 shadow table-wrapper table-responsive">
+      <table class="table table-hover">
+          <thead>
+              <tr>
+                  <th class="border-gray-200">#</th>
+                  <th class="border-gray-200">Nom de la matières</th>
+                  <th class="border-gray-200">Action</th>
+              </tr>
+          </thead>
+          <tbody>
+              {% for item in matieres %}
+                <!-- Item -->
+                <tr>
+                    <td>
+                        <a href="#" class="fw-bold">
+                            {{item.id}}
+                        </a>
+                    </td>
+                    <td>
+                        <span class="fw-normal">{{item.nom_matiere}}</span>
+                    </td>
+
+                    <td>
+						<a href="{% url 'matiere' item.id %}" class="fw-bold text-success">
+                            Voir matière
+                        </a>
+                        <br>
+                        <a href="{% url 'delete_matiere' item.id %}" class="fw-bold text-danger">
+                            Supprimer matière
+                        </a>
+                    </td>
+                </tr>
+                <!-- Item -->
+              {% endfor %}
+          </tbody>
+      </table>
+  </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

@@ -1,0 +1,68 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Mes Factures {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+    <div class="d-block mb-4 mb-md-0">
+        
+        <h2 class="h4">Tous Mes Factures </h2>
+    </div>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        
+        
+    </div>
+</div>
+  <div class="table-settings mb-4">
+
+  </div>
+
+  <div class="card card-body border-0 shadow table-wrapper table-responsive">
+      <table class="table table-hover">
+          <thead>
+              <tr>
+                  <th class="border-gray-200">#</th>
+                  <th class="border-gray-200">Magasin</th>
+                  <th class="border-gray-200">Date Création</th>
+                  <th class="border-gray-200">Totale</th>
+                  <th class="border-gray-200">Reste</th>
+                  <th class="border-gray-200">Status</th>
+                  <th class="border-gray-200">Action</th>
+              </tr>
+          </thead>
+          <tbody>
+              {% for item in mes_factures %}
+                <!-- Item -->
+                <tr>
+                    <td>
+                        <a href="#" class="fw-bold">
+                            {{item.id}}
+                        </a>
+                    </td>
+                    <td>
+                        <span class="fw-normal">{{item.magazin}}</span>
+                    </td>
+                    <td><span class="fw-normal">{{item.date_de_creation}}</span></td>
+                    <td><span class="fw-bold">{{item.somme_operation}}</span></td>
+                    <td><span class="fw-bold">{{item.reste_a_paier}}</span></td>
+                    <td><span class="fw-bold
+                        {% if item.status == 'validée et payée'  %} text-success {% else %}text-warning{% endif %} ">{{item.status}}</span></td>
+                    <td>
+                        <a href="{% url 'facture_detail' item.id %}" class="fw-bold">
+                            detaile
+                        </a>
+                    </td>
+                </tr>
+                <!-- Item -->
+              {% endfor %}
+          </tbody>
+      </table>
+  </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
