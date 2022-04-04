@@ -40,7 +40,7 @@ It contains an Invoice and Stock managments and a dashboard visualisation page.
 ```bash
 $ # Get the code
 $ git clone 
-$ cd django-volt-dashboard
+$ cd farabi
 $
 $ # Virtualenv modules installation (Unix based systems)
 $ virtualenv env
