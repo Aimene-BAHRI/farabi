@@ -2,7 +2,7 @@ from random import choices
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-
+from django.conf import settings
 from apps.home.models import Activity, Cours_particulier, Abonement, Facture, Student, Magazin, Matiere, Parent, StudyLevel, Villa
 
 class UserProfileForm(forms.ModelForm):
@@ -50,7 +50,7 @@ class ParentForm(forms.ModelForm):
 	father_avatar = forms.ImageField(label="Image du père")
 	mother_name = forms.CharField(label="nom et prénom de la mère", widget=forms.TextInput(attrs={'class': 'form-control'}))
 	mother_profession = forms.CharField(label="profession de la mère", widget=forms.TextInput(attrs={'class': 'form-control'}))
-	mother_phone = forms.CharField(label="numéro de téléphone du mère", widget=forms.TextInput(attrs={'class': 'form-control'}))
+	mother_phone = forms.CharField(label="numéro de téléphone de la mère", widget=forms.TextInput(attrs={'class': 'form-control'}))
 	authorized_people = forms.TextInput(attrs={"label":"personnes autorisées à récupérer l'élève",'class': 'form-control'})
 	subscribed_plan = forms.ChoiceField(
 		choices= Plan_CHOICES,
@@ -80,6 +80,7 @@ class StudyLevelForm(forms.ModelForm):
 		model = StudyLevel
 		fields = '__all__'
 
+from django.contrib.admin import widgets
 class StudentForm(forms.ModelForm):
 	def __init__(self, *args, **kwargs):
 		super(StudentForm, self).__init__(*args, **kwargs)
@@ -102,7 +103,7 @@ class StudentForm(forms.ModelForm):
 	)
 	date_of_birth = forms.DateField(
 		label="La date de naissance de l'élève",
-		input_formats=['%Y-%m-%d', '%m/%d/%Y', '%m/%d/%y'],
+		input_formats = settings.DATE_INPUT_FORMATS,
 		widget=forms.DateInput(attrs={
 			'class': 'form-control',
 			'id' : 'birthday',
@@ -112,7 +113,7 @@ class StudentForm(forms.ModelForm):
 	)
 	scolar_inscription_date = forms.DateField(
 		label="La date d'inscription scolaire",
-		input_formats=['%Y-%m-%d', '%m/%d/%Y', '%m/%d/%y'],
+		input_formats = settings.DATE_INPUT_FORMATS,
 		widget=forms.DateInput(attrs={
 			'class': 'form-control',
 			'id' : 'birthday',
@@ -123,7 +124,7 @@ class StudentForm(forms.ModelForm):
 
 	pedagogic_inscription_date = forms.DateField(
 		label="La date d'inscription pédagogique",
-		input_formats=['%Y-%m-%d', '%m/%d/%Y', '%m/%d/%y'],
+		input_formats = settings.DATE_INPUT_FORMATS,
 		widget=forms.DateInput(attrs={
 			'class': 'form-control',
 			'id' : 'birthday',
@@ -132,11 +133,10 @@ class StudentForm(forms.ModelForm):
 			'data-datepicker':""})
 	)
 
-	activities = forms.ModelMultipleChoiceField(
+	activities2 = forms.ModelMultipleChoiceField(
 		label="Les activités de l'éleve",
-		widget=forms.CheckboxSelectMultiple(attrs={
-			'class' : "form-check-input",
-			'type' : "checkbox",
+		widget=widgets.FilteredSelectMultiple('Field name', False, attrs={
+			'class' : "form-control",
 		}), queryset=Activity.objects.all()
 	)
 	class Meta:
@@ -148,11 +148,11 @@ class StudentForm(forms.ModelForm):
 			'address', 'allergic', 'chronical_sickness',
 			'particular_handicap', 'student_gender', 'student_avatar',
 			'scolar_inscription_date', 'pedagogic_inscription_date',
-			'scolar_year', 'last_school_attended','activities',)
+			'scolar_year', 'last_school_attended','activities2',)
 
 class MagazinForm(forms.ModelForm):
 	nom_magazin = forms.CharField(
-		label='Le nom du magasin',
+		label='Le nom de magasin',
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
 
 	caisse = forms.CharField(
@@ -170,7 +170,7 @@ class VillaForm(forms.ModelForm):
 
 	magazin = forms.ModelChoiceField(
 		queryset=Magazin.objects.all(),
-		label='Le nom du magasin',
+		label='Le nom de magasin',
 		widget=forms.Select(attrs={
 		'class': 'form-control form-select'}))
 
@@ -182,12 +182,12 @@ class VillaForm(forms.ModelForm):
 
 class FactureForm(forms.ModelForm):
 	magazin = forms.ModelChoiceField(queryset=Magazin.objects.all(),
-					  label='Le nom du magasin',
+					  label='Le nom de magasin',
 					widget=forms.Select(attrs={
 					'class': 'form-control form-select'}))
 
 	operateur = forms.ModelChoiceField(queryset=User.objects.all(),
-					  label="L'operateur",
+					  label="L'opérateur",
 					widget=forms.Select(attrs={
 					'class': 'form-control form-select'}))
 
@@ -206,8 +206,8 @@ class FactureForm(forms.ModelForm):
 					'class': 'form-control'}))
 
 	date_de_creation = forms.DateField(
-					  label="La date de création du facture",
-					input_formats=['%Y-%m-%d', '%m/%d/%Y', '%m/%d/%y'],
+					  label="La date de création de facture",
+					input_formats = settings.DATE_INPUT_FORMATS,
 					widget=forms.DateInput(attrs={
 						'class': 'form-control',
 						'id' : 'birthday',
@@ -227,12 +227,12 @@ class FactureForm(forms.ModelForm):
 
 class AbonementForm(forms.ModelForm):
 	magazin = forms.ModelChoiceField(queryset=Magazin.objects.all(),
-					  label='Le nom du magasin',
+					  label='Le nom de magasin',
 					widget=forms.Select(attrs={
 					'class': 'form-control form-select'}))
 
 	operateur = forms.ModelChoiceField(queryset=Parent.objects.all(),
-					  label="L'operateur",
+					  label="L'opérateur",
 					widget=forms.Select(attrs={
 					'class': 'form-control form-select'}))
 
@@ -251,8 +251,8 @@ class AbonementForm(forms.ModelForm):
 					'class': 'form-control'}))
 
 	date_de_creation = forms.DateField(
-					  label="La date de création du facture",
-					input_formats=['%Y-%m-%d', '%m/%d/%Y', '%m/%d/%y'],
+					  label="La date de création de facture",
+					input_formats = settings.DATE_INPUT_FORMATS,
 					widget=forms.DateInput(attrs={
 						'class': 'form-control',
 						'id' : 'birthday',
@@ -272,7 +272,7 @@ class MatiereForm(forms.ModelForm):
 		model = Matiere
 		fields = '__all__'
 
-from django.conf import settings
+
 class Cours_particulierForm(forms.ModelForm):
 	def __init__(self, *args, **kwargs):
 		super(Cours_particulierForm, self).__init__(*args, **kwargs)
@@ -294,7 +294,7 @@ class Cours_particulierForm(forms.ModelForm):
 		widget=forms.NumberInput(attrs={'class': 'form-control'}))
 
 	date_de_creation = forms.DateField(
-					  label="La date de création du facture",
+					  label="La date de création de facture",
 					input_formats=settings.DATE_INPUT_FORMATS,
 					widget=forms.DateInput(attrs={
 						'class': 'form-control',

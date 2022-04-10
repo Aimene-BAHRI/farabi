@@ -30,7 +30,7 @@ class Parent(models.Model):
 	father_avatar = models.ImageField(upload_to = 'avatars/')
 	mother_name = models.CharField("nom et prénom de la mère", max_length=100)
 	mother_profession = models.CharField("profession de la mère", max_length=300)
-	mother_phone = models.CharField("numéro de téléphone du mère", max_length=20)
+	mother_phone = models.CharField("numéro de téléphone de la mère", max_length=20)
 	authorized_people = models.TextField("personnes autorisées à récupérer  l'élève")
 	subscribed_plan = models.CharField("le plan d'abonement", choices=Plan_CHOICES, max_length=30, default="mensuel")
 
@@ -209,7 +209,7 @@ class Cours_particulier(models.Model):
 	matiere = models.ForeignKey("Matiere", on_delete=models.CASCADE, verbose_name="matiere", related_name="courses")
 	prix_matiere = models.DecimalField(max_digits=8, decimal_places=2, default=0)
 	study_level = models.OneToOneField(StudyLevel, on_delete=models.CASCADE, related_name='particular_courses', null=True, blank=True)
-	cours_type = models.CharField("le type du cours",max_length=20, choices=Type_CHOICES, default="individuel")
+	cours_type = models.CharField("le type de cours",max_length=20, choices=Type_CHOICES, default="individuel")
 	date_de_creation = models.DateField(default=timezone.now)
 
 	def get_full_name(self):

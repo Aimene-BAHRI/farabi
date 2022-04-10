@@ -1,6 +1,6 @@
 {% extends "layouts/base.html" %}
 
-{% block title %} Facture detaile {% endblock %} 
+{% block title %} Facture détails {% endblock %} 
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %}
@@ -42,7 +42,7 @@
 					<td></td>
 					<td></td>
 					<td>
-						numéro de facture #: <strong>{{invoice.id}}</strong><br />
+						numéro de la facture #: <strong>{{invoice.id}}</strong><br />
 					Créer le : {{invoice.date_de_creation|date}}<br />
 					{% comment %} Due: {{invoice.dueDate}} {% endcomment %}
 					</td>

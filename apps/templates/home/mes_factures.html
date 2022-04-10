@@ -9,7 +9,7 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
     <div class="d-block mb-4 mb-md-0">
         
-        <h2 class="h4">Tous Mes Factures </h2>
+        <h2 class="h4">Toutes Mes Factures </h2>
     </div>
     <div class="btn-toolbar mb-2 mb-md-0">
         
@@ -29,7 +29,7 @@
                   <th class="border-gray-200">Date Création</th>
                   <th class="border-gray-200">Totale</th>
                   <th class="border-gray-200">Reste</th>
-                  <th class="border-gray-200">Status</th>
+                  <th class="border-gray-200">Statut</th>
                   <th class="border-gray-200">Action</th>
               </tr>
           </thead>
@@ -52,7 +52,7 @@
                         {% if item.status == 'validée et payée'  %} text-success {% else %}text-warning{% endif %} ">{{item.status}}</span></td>
                     <td>
                         <a href="{% url 'facture_detail' item.id %}" class="fw-bold">
-                            detaile
+                            détails
                         </a>
                     </td>
                 </tr>

@@ -135,4 +135,4 @@ MEDIA_URL = '/media/'
 # EMAIL_FILE_PATH = str(os.path.join(BASE_DIR, 'sent_emails'))
 
 
-DATE_INPUT_FORMATS = ['%d/%m/%Y']
+DATE_INPUT_FORMATS = ['%d/%m/%Y' ]
